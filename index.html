@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumière Aesthetics — Reception</title>
+
+<!--
+  ════════════════════════════════════════════════════════════════
+   RETELL VOICE WIDGET  —  replace the two CAPITALISED values below
+  ════════════════════════════════════════════════════════════════
+   1) data-voice-public-key  → your Public Key   (Settings → Public Keys)
+   2) data-voice-agent-id    → your DEMO agent's agent_... ID
+   Everything else is branding you can tweak freely.
+-->
+<script
+  id="retell-widget"
+  src="https://dashboard.retellai.com/retell-widget-v2.js"
+  type="module"
+  data-voice-public-key="YOUR_VOICE_PUBLIC_KEY"
+  data-voice-agent-id="YOUR_DEMO_AGENT_ID"
+  data-title="Lumière Aesthetics"
+  data-fab-text="Talk to Reception"
+  data-color="#B4936A"
+  data-logo-url=""
+  data-auto-open="false"
+></script>
+<!--
+  Optional tweaks:
+   • data-auto-open="true"  → the voice panel opens the moment the page loads
+                              (nice for a pure "share the link" demo)
+   • data-logo-url="https://your-logo.png"  → shows the clinic logo in the widget
+   • data-white-label="TOKEN"  → hides the small "Powered by Retell" line
+                                 (email Retell to request the token)
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#F3EEEA; --ink:#2A2430; --muted:#6E6472; --accent:#B4936A;
+    --orb-1:#E9D5D0; --orb-2:#D9B9A0; --orb-3:#C9A6B4; --orb-4:#CBB8D8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(120% 90% at 50% -10%, #FBF8F5 0%, var(--bg) 55%, #EFE8E1 100%);
+    color:var(--ink); font-family:"Hanken Grotesk",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column; min-height:100dvh;
+  }
+  header{display:flex;flex-direction:column;align-items:center;gap:2px;padding:40px 24px 0}
+  .wordmark{font-weight:600;font-size:14px;letter-spacing:.42em;text-transform:uppercase;padding-left:.42em}
+  .locale{font-family:"Fraunces",serif;font-style:italic;font-size:13.5px;color:var(--muted)}
+
+  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+       gap:30px;padding:24px;text-align:center}
+
+  /* soft ambient halo (decorative — the widget shows its own live visualiser) */
+  .halo{position:relative;width:230px;height:230px;display:grid;place-items:center}
+  .halo .ring{
+    position:absolute;width:230px;height:230px;border-radius:50%;overflow:hidden;
+    box-shadow:0 20px 60px -22px rgba(140,110,120,.5),inset 0 0 40px rgba(255,255,255,.35);
+    animation:breathe 6.5s ease-in-out infinite;
+  }
+  .blob{position:absolute;border-radius:50%;filter:blur(16px);mix-blend-mode:screen;opacity:.9}
+  .b1{inset:-8% -6% 30% -4%;background:radial-gradient(circle,var(--orb-1),transparent 68%);animation:drift1 11s ease-in-out infinite}
+  .b2{inset:22% -10% -8% 18%;background:radial-gradient(circle,var(--orb-2),transparent 66%);animation:drift2 13s ease-in-out infinite}
+  .b3{inset:-4% 20% 24% -12%;background:radial-gradient(circle,var(--orb-3),transparent 66%);animation:drift3 15s ease-in-out infinite}
+  .b4{inset:30% 24% -12% 22%;background:radial-gradient(circle,var(--orb-4),transparent 68%);animation:drift1 12.5s ease-in-out infinite reverse}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6%,-5%) scale(1.08)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7%,4%) scale(1.1)}}
+  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5%,6%) scale(1.06)}}
+
+  .copy{max-width:430px;display:flex;flex-direction:column;gap:14px;align-items:center}
+  .eyebrow{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:600;padding-left:.28em}
+  h1{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(30px,7vw,42px);line-height:1.05;letter-spacing:-.01em}
+  .desc{font-size:15.5px;line-height:1.6;color:var(--muted);max-width:400px}
+
+  .cue{
+    display:inline-flex;align-items:center;gap:9px;margin-top:2px;
+    font-size:13.5px;color:var(--muted);
+  }
+  .cue .pill{
+    background:var(--ink);color:#F7F3EF;font-weight:500;font-size:13px;
+    padding:6px 13px;border-radius:100px;
+  }
+  .cue svg{width:16px;height:16px;color:var(--accent);animation:nudge 1.8s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,3px)}}
+
+  footer{padding:22px 24px 30px;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7}
+
+  @media (prefers-reduced-motion:reduce){.ring,.blob,.cue svg{animation:none!important}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wordmark">Lumière Aesthetics</div>
+    <div class="locale">Jubilee Hills · Hyderabad</div>
+  </header>
+
+  <main>
+    <div class="halo" aria-hidden="true">
+      <div class="ring">
+        <div class="blob b1"></div><div class="blob b2"></div>
+        <div class="blob b3"></div><div class="blob b4"></div>
+      </div>
+    </div>
+
+    <div class="copy">
+      <div class="eyebrow">Reception</div>
+      <h1>Meet your virtual receptionist.</h1>
+      <p class="desc">Ask about treatments, pricing, or availability — and book your visit, all in one conversation. No forms, no hold music.</p>
+    </div>
+
+    <div class="cue">
+      <span>Tap</span>
+      <span class="pill">Talk to Reception</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7v10H7"/></svg>
+    </div>
+  </main>
+
+  <footer>Available 24/7 · Lumière Aesthetics</footer>
+</body>
+</html>
