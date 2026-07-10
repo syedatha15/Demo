@@ -18,8 +18,8 @@
   id="retell-widget"
   src="https://dashboard.retellai.com/retell-widget-v2.js"
   type="module"
-  data-voice-public-key=public_key_ca97a6b39fb34a0733e7c
-  data-voice-agent-id=agent_830285a2b3c2aae5128ea0f5f6
+  data-voice-public-key="public_key_ca97a6b39fb34a0733e7c"
+  data-voice-agent-id="agent_830285a2b3c2aae5128ea0f5f6"
   data-title="Celestee — Reception"
   data-fab-text="Talk to Reception"
   data-color="#B4936A"
@@ -126,28 +126,42 @@
   <footer>Celestee Skin, Laser &amp; Hair Clinic &middot; Available 24/7</footer>
  
 <script>
-  // Capture Retell's launcher the moment the widget injects it into the page,
-  // so our big button can open the voice panel on click.
-  let retellLauncher = null;
-  const grab = () => {
-    if (retellLauncher && document.body.contains(retellLauncher)) return;
-    const nodes = document.querySelectorAll(
-      '[id*="retell" i] button, button[id*="retell" i], [class*="retell" i] button, button[class*="retell" i]'
-    );
-    if (nodes.length) retellLauncher = nodes[nodes.length - 1];
-  };
-  new MutationObserver(grab).observe(document.documentElement, { childList:true, subtree:true });
-  window.addEventListener('load', () => setTimeout(grab, 1200));
- 
-  function openReceptionist(){
-    grab();
-    if (retellLauncher){
-      retellLauncher.click();
-    } else {
-      var label = document.getElementById('talkLabel');
-      label.textContent = 'Starting…';
-      setTimeout(function(){ grab(); retellLauncher ? retellLauncher.click() : (label.textContent='Talk to Reception'); }, 900);
+  // Retell mounts its launcher in an open shadow root on a child of
+  // #retell-widget-root, so it is unreachable from document.querySelector.
+  const launcher = () => {
+    const root = document.getElementById('retell-widget-root');
+    if (!root) return null;
+    for (const el of root.children){
+      const btn = el.shadowRoot && el.shadowRoot.querySelector('button[class*="fabBase"]');
+      if (btn) return btn;
     }
+    return null;
+  };
+
+  // The launcher doubles as the minimize/return control once the panel is up.
+  const isClosed = (fab) => fab.getAttribute('aria-label') !== 'Minimize window';
+
+  function openReceptionist(){
+    const label = document.getElementById('talkLabel');
+    const fab = launcher();
+    if (fab){
+      if (isClosed(fab)) fab.click();
+      return;
+    }
+
+    label.textContent = 'Starting…';
+    const deadline = Date.now() + 8000;
+    const timer = setInterval(() => {
+      const b = launcher();
+      if (b){
+        clearInterval(timer);
+        label.textContent = 'Talk to Reception';
+        if (isClosed(b)) b.click();
+      } else if (Date.now() > deadline){
+        clearInterval(timer);
+        label.textContent = 'Talk to Reception';
+      }
+    }, 150);
   }
 </script>
 </body>
