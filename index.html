@@ -3,125 +3,153 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lumière Aesthetics — Reception</title>
-
+<title>Celestee Skin, Laser & Hair Clinic — AI Receptionist</title>
+ 
 <!--
   ════════════════════════════════════════════════════════════════
-   RETELL VOICE WIDGET  —  replace the two CAPITALISED values below
+   RETELL VOICE WIDGET  —  paste your TWO real values below.
+   (Copy them from your current file — the key + agent id you already have.)
   ════════════════════════════════════════════════════════════════
-   1) data-voice-public-key  → your Public Key   (Settings → Public Keys)
-   2) data-voice-agent-id    → your DEMO agent's agent_... ID
-   Everything else is branding you can tweak freely.
+   1) data-voice-public-key  -> your Public Key   (public_key_...)
+   2) data-voice-agent-id    -> your DEMO agent's agent_... ID
+   NOTE: keep the quotes around each value.
 -->
 <script
   id="retell-widget"
   src="https://dashboard.retellai.com/retell-widget-v2.js"
   type="module"
-  data-voice-public-key="YOUR_VOICE_PUBLIC_KEY"
-  data-voice-agent-id="YOUR_DEMO_AGENT_ID"
-  data-title="Lumière Aesthetics"
+  data-voice-public-key=public_key_ca97a6b39fb34a0733e7c
+  data-voice-agent-id=agent_830285a2b3c2aae5128ea0f5f6
+  data-title="Celestee — Reception"
   data-fab-text="Talk to Reception"
   data-color="#B4936A"
   data-logo-url=""
   data-auto-open="false"
 ></script>
 <!--
-  Optional tweaks:
-   • data-auto-open="true"  → the voice panel opens the moment the page loads
-                              (nice for a pure "share the link" demo)
-   • data-logo-url="https://your-logo.png"  → shows the clinic logo in the widget
-   • data-white-label="TOKEN"  → hides the small "Powered by Retell" line
-                                 (email Retell to request the token)
+  Want zero clicks? Set data-auto-open="true" and the voice panel opens
+  the instant the page loads — good for a link you email to a client.
 -->
-
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --bg:#F3EEEA; --ink:#2A2430; --muted:#6E6472; --accent:#B4936A;
-    --orb-1:#E9D5D0; --orb-2:#D9B9A0; --orb-3:#C9A6B4; --orb-4:#CBB8D8;
+    /* Brand colour lives here AND in data-color above — change both to match Celestee. */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
-    background:radial-gradient(120% 90% at 50% -10%, #FBF8F5 0%, var(--bg) 55%, #EFE8E1 100%);
+    background:radial-gradient(125% 90% at 50% 8%, #FBF8F5 0%, var(--bg) 52%, #EDE5DD 100%);
     color:var(--ink); font-family:"Hanken Grotesk",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
     display:flex; flex-direction:column; min-height:100dvh;
   }
-  header{display:flex;flex-direction:column;align-items:center;gap:2px;padding:40px 24px 0}
-  .wordmark{font-weight:600;font-size:14px;letter-spacing:.42em;text-transform:uppercase;padding-left:.42em}
-  .locale{font-family:"Fraunces",serif;font-style:italic;font-size:13.5px;color:var(--muted)}
-
+ 
+  /* slim brand header — kept quiet so it doesn't compete with the CTA */
+  header{display:flex;flex-direction:column;align-items:center;gap:3px;padding:34px 24px 0}
+  .wordmark{font-weight:700;font-size:15px;letter-spacing:.34em;text-transform:uppercase;padding-left:.34em}
+  .tag{font-size:10.5px;letter-spacing:.30em;text-transform:uppercase;color:var(--muted)}
+ 
+  /* everything funnels to the button */
   main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-       gap:30px;padding:24px;text-align:center}
-
-  /* soft ambient halo (decorative — the widget shows its own live visualiser) */
-  .halo{position:relative;width:230px;height:230px;display:grid;place-items:center}
-  .halo .ring{
-    position:absolute;width:230px;height:230px;border-radius:50%;overflow:hidden;
-    box-shadow:0 20px 60px -22px rgba(140,110,120,.5),inset 0 0 40px rgba(255,255,255,.35);
-    animation:breathe 6.5s ease-in-out infinite;
-  }
-  .blob{position:absolute;border-radius:50%;filter:blur(16px);mix-blend-mode:screen;opacity:.9}
-  .b1{inset:-8% -6% 30% -4%;background:radial-gradient(circle,var(--orb-1),transparent 68%);animation:drift1 11s ease-in-out infinite}
-  .b2{inset:22% -10% -8% 18%;background:radial-gradient(circle,var(--orb-2),transparent 66%);animation:drift2 13s ease-in-out infinite}
-  .b3{inset:-4% 20% 24% -12%;background:radial-gradient(circle,var(--orb-3),transparent 66%);animation:drift3 15s ease-in-out infinite}
-  .b4{inset:30% 24% -12% 22%;background:radial-gradient(circle,var(--orb-4),transparent 68%);animation:drift1 12.5s ease-in-out infinite reverse}
-  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6%,-5%) scale(1.08)}}
-  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7%,4%) scale(1.1)}}
-  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5%,6%) scale(1.06)}}
-
-  .copy{max-width:430px;display:flex;flex-direction:column;gap:14px;align-items:center}
+       gap:26px;padding:24px 24px 8px;text-align:center}
+ 
   .eyebrow{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:600;padding-left:.28em}
-  h1{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(30px,7vw,42px);line-height:1.05;letter-spacing:-.01em}
-  .desc{font-size:15.5px;line-height:1.6;color:var(--muted);max-width:400px}
-
-  .cue{
-    display:inline-flex;align-items:center;gap:9px;margin-top:2px;
-    font-size:13.5px;color:var(--muted);
+  h1{
+    font-family:"Fraunces",serif;font-weight:400;
+    font-size:clamp(28px,6.4vw,44px);line-height:1.08;letter-spacing:-.01em;max-width:640px;
   }
-  .cue .pill{
-    background:var(--ink);color:#F7F3EF;font-weight:500;font-size:13px;
-    padding:6px 13px;border-radius:100px;
+  .sub{font-size:16px;line-height:1.55;color:var(--muted);max-width:440px}
+ 
+  /* THE DOMINANT CTA */
+  .cta-wrap{position:relative;display:grid;place-items:center;margin-top:8px}
+  .pulse{
+    position:absolute;width:100%;height:100%;border-radius:100px;
+    box-shadow:0 0 0 0 rgba(180,147,106,.5);
+    animation:pulse 2.4s cubic-bezier(.4,0,.6,1) infinite;pointer-events:none;
   }
-  .cue svg{width:16px;height:16px;color:var(--accent);animation:nudge 1.8s ease-in-out infinite}
-  @keyframes nudge{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,3px)}}
-
-  footer{padding:22px 24px 30px;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7}
-
-  @media (prefers-reduced-motion:reduce){.ring,.blob,.cue svg{animation:none!important}}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(180,147,106,.45)}
+    70%{box-shadow:0 0 0 26px rgba(180,147,106,0)}
+    100%{box-shadow:0 0 0 0 rgba(180,147,106,0)}
+  }
+  .cta{
+    position:relative;z-index:1;cursor:pointer;border:none;font-family:inherit;
+    display:inline-flex;align-items:center;justify-content:center;gap:14px;
+    background:var(--ink);color:#F8F4F0;
+    font-size:20px;font-weight:600;letter-spacing:.005em;
+    padding:24px 46px;border-radius:100px;
+    box-shadow:0 22px 46px -18px rgba(42,36,48,.7);
+    transition:transform .16s ease,box-shadow .28s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 30px 56px -18px rgba(42,36,48,.72),0 0 0 5px rgba(180,147,106,.18)}
+  .cta:active{transform:translateY(0)}
+  .cta svg{width:24px;height:24px}
+ 
+  .microline{font-size:13px;color:var(--muted);opacity:.85;margin-top:2px}
+  .microline b{color:var(--ink);font-weight:600}
+ 
+  footer{padding:24px;text-align:center;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.65}
+ 
+  @media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+  @media (max-width:420px){
+    .cta{font-size:18px;padding:21px 36px}
+    h1{font-size:clamp(26px,8vw,34px)}
+  }
 </style>
 </head>
 <body>
   <header>
-    <div class="wordmark">Lumière Aesthetics</div>
-    <div class="locale">Jubilee Hills · Hyderabad</div>
+    <div class="wordmark">Celestee</div>
+    <div class="tag">Skin &middot; Laser &middot; Hair — Jubilee Hills, Hyderabad</div>
   </header>
-
+ 
   <main>
-    <div class="halo" aria-hidden="true">
-      <div class="ring">
-        <div class="blob b1"></div><div class="blob b2"></div>
-        <div class="blob b3"></div><div class="blob b4"></div>
-      </div>
+    <div class="eyebrow">AI Receptionist</div>
+    <h1>Talk to Celestee's receptionist — ask anything, book instantly.</h1>
+    <p class="sub">Treatments, pricing, timings, appointments. One quick conversation, no forms, no waiting on hold.</p>
+ 
+    <div class="cta-wrap">
+      <div class="pulse"></div>
+      <button class="cta" id="talkBtn" onclick="openReceptionist()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+        <span id="talkLabel">Talk to Reception</span>
+      </button>
     </div>
-
-    <div class="copy">
-      <div class="eyebrow">Reception</div>
-      <h1>Meet your virtual receptionist.</h1>
-      <p class="desc">Ask about treatments, pricing, or availability — and book your visit, all in one conversation. No forms, no hold music.</p>
-    </div>
-
-    <div class="cue">
-      <span>Tap</span>
-      <span class="pill">Talk to Reception</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7v10H7"/></svg>
-    </div>
+ 
+    <p class="microline">Tap the button, then <b>allow your microphone</b> to start talking.</p>
   </main>
-
-  <footer>Available 24/7 · Lumière Aesthetics</footer>
+ 
+  <footer>Celestee Skin, Laser &amp; Hair Clinic &middot; Available 24/7</footer>
+ 
+<script>
+  // Capture Retell's launcher the moment the widget injects it into the page,
+  // so our big button can open the voice panel on click.
+  let retellLauncher = null;
+  const grab = () => {
+    if (retellLauncher && document.body.contains(retellLauncher)) return;
+    const nodes = document.querySelectorAll(
+      '[id*="retell" i] button, button[id*="retell" i], [class*="retell" i] button, button[class*="retell" i]'
+    );
+    if (nodes.length) retellLauncher = nodes[nodes.length - 1];
+  };
+  new MutationObserver(grab).observe(document.documentElement, { childList:true, subtree:true });
+  window.addEventListener('load', () => setTimeout(grab, 1200));
+ 
+  function openReceptionist(){
+    grab();
+    if (retellLauncher){
+      retellLauncher.click();
+    } else {
+      var label = document.getElementById('talkLabel');
+      label.textContent = 'Starting…';
+      setTimeout(function(){ grab(); retellLauncher ? retellLauncher.click() : (label.textContent='Talk to Reception'); }, 900);
+    }
+  }
+</script>
 </body>
 </html>
+ 
